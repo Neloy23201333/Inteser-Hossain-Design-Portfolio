@@ -1,0 +1,865 @@
+:root{
+  --ink:#050505;--ink2:#0b0c0e;--ink3:#121417;--paper:#f8f7f2;--paper2:#f0eee8;
+  --cyan:#12b8d6;--cyan-soft:#90eef8;--text:#101114;--muted:#62636a;
+  --line:rgba(15,16,19,.16);--line-light:rgba(255,255,255,.14);
+  --display:"Public Sans",Arial,sans-serif;--serif:"Castoro",Georgia,serif;
+  --radius:10px;--gap:12px;--header-h:68px;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth;background:var(--ink)}body{margin:0;background:var(--paper);color:var(--text);font-family:var(--display);overflow-x:hidden}a{color:inherit}img,video{max-width:100%}button{font:inherit}.u-screen-reader-text{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}.width-sixteen-col{width:min(1600px,calc(100% - 56px));margin-inline:auto}.portfolio-shell{position:relative;z-index:1}.eyebrow{margin:0 0 15px;color:var(--cyan);font-size:11px;font-weight:800;letter-spacing:.17em;text-transform:uppercase}.project-number{margin:0 0 10px;font-size:10px;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#777}.project-kicker{margin:10px 0 0;text-transform:uppercase;font-size:10px;letter-spacing:.14em;color:#6e7076}.light-section{position:relative;background:transparent}.dark-project{position:relative;background:var(--ink);color:#fff}.portfolio-section{padding:96px 0}.target-section{scroll-margin-top:92px}
+
+/* fixed paper layer for the light middle of the site */
+body::before{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;background-color:#faf9f5;background-image:url("../assets/background/paper-grid.jpg");background-repeat:repeat;background-position:center top;background-size:736px auto;opacity:.08}.portfolio-shell>main,.portfolio-shell>footer{position:relative;z-index:1}
+
+/* loader */
+#preloader{position:fixed;inset:0;z-index:9999;background:#000;display:grid;place-items:center;transition:opacity .4s,visibility .4s}.portfolio-loader{display:flex;gap:9px}.portfolio-loader span{width:9px;height:9px;border-radius:50%;background:var(--cyan);animation:loader 1s ease-in-out infinite}.portfolio-loader span:nth-child(2){animation-delay:.12s}.portfolio-loader span:nth-child(3){animation-delay:.24s}#preloader.is-hidden{opacity:0;visibility:hidden}@keyframes loader{50%{transform:translateY(-9px);opacity:.35}}
+
+/* header: kept compact and out of the supplied artwork */
+.portfolio-header{position:fixed;z-index:1000;top:0;left:0;width:100%;height:var(--header-h);background:rgba(0,0,0,.84);backdrop-filter:blur(14px);border-bottom:1px solid rgba(18,184,214,.34)}.portfolio-header__inner{height:100%;display:flex;align-items:center;justify-content:space-between}.portfolio-brand{display:flex;width:90px;height:46px;align-items:center}.portfolio-brand img{display:block;width:90px;height:auto;max-height:42px;object-fit:contain}.portfolio-nav{display:flex;gap:30px;align-items:center}.portfolio-nav a{color:#f4f4f5;text-decoration:none;text-transform:uppercase;font-size:10px;letter-spacing:.17em;opacity:.86}.portfolio-nav a:hover{color:var(--cyan);opacity:1}.portfolio-menu-toggle{display:none;background:none;border:0;width:42px;height:42px;padding:10px}.portfolio-menu-toggle span{display:block;height:1px;background:#fff;margin:7px 0}
+
+/* landing: intentionally uncropped and natural aspect ratio */
+.portfolio-hero.portfolio-landing{width:100%;min-height:0;padding:0;margin:0;background:#000;color:#fff;overflow:visible}.portfolio-landing__art{width:100%;height:auto;display:flex;justify-content:center;align-items:flex-start;background:#000;overflow:visible}.portfolio-landing__art img{display:block;width:100%;height:auto;max-width:none;max-height:none;object-fit:contain;object-position:center top;margin:0;user-select:none;-webkit-user-drag:none}
+
+/* seamless dual-copy ticker */
+.prework-shell{position:relative}.portfolio-marquee{width:100%;overflow:hidden;white-space:nowrap;background:var(--cyan);color:#001014;position:relative;z-index:20;border-block:1px solid rgba(0,0,0,.18)}.portfolio-marquee--landing{position:sticky;top:var(--header-h);box-shadow:0 10px 28px rgba(0,0,0,.12)}.portfolio-marquee__track{display:flex;width:max-content;will-change:transform;animation:marquee 34s linear infinite}.marquee-group{display:flex;align-items:center;gap:28px;padding:14px 28px 14px 0;flex:none;font-size:10px;font-weight:900;letter-spacing:.15em}.marquee-group b{font-size:9px}.portfolio-marquee:hover .portfolio-marquee__track{animation-play-state:paused}@keyframes marquee{to{transform:translateX(-50%)}}
+
+/* intro */
+.intro-section{padding:104px 0 82px}.section-heading{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.65fr);gap:7vw;align-items:end;margin-bottom:44px}.section-heading h2,.mini-heading h2,.chapter-title h2,.project-case__header h2,.content-project__header h2,.split-project h2,.about-board h2,.contact-board h2{margin:0;font-size:clamp(46px,5.8vw,92px);line-height:.94;letter-spacing:-.055em;font-weight:700}.section-heading--intro h2{max-width:970px}.section-copy{max-width:630px}.section-copy>p:first-child,.chapter-title>p:last-child,.section-heading--dark>p,.content-project__header>p{margin:0;font-size:16px;line-height:1.68;color:#55575d}.micro-copy{margin:20px 0 0;padding-top:18px;border-top:1px solid var(--line);font-size:10px;line-height:1.6;letter-spacing:.12em;text-transform:uppercase;color:#73757b}
+.capability-wall{display:grid;grid-template-columns:1.15fr .85fr .85fr;gap:var(--gap);align-items:start}.capability-wall figure,.capability-wall .capability-motion{margin:0;background:#0a0a0b;border:1px solid rgba(0,0,0,.12);border-radius:var(--radius);overflow:hidden}.capability-wall img,.capability-wall video{display:block;width:100%;height:auto;object-fit:contain;background:#0a0a0b}.capability-wall figure:first-child{grid-row:span 2}.capability-wall figcaption{padding:11px 13px;background:#fff;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:#666}.capability-list{margin-top:38px;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}.capability-list article{min-height:205px;padding:24px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,255,255,.5)}.capability-list span{font-size:9px;color:#8b8d92;letter-spacing:.14em}.capability-list h3{margin:34px 0 9px;font-size:23px;letter-spacing:-.035em}.capability-list p{margin:0;color:#66686e;font-size:13px;line-height:1.55}
+
+/* project directory */
+.project-index{padding:18px 0 92px}.mini-heading{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:end;border-top:1px solid var(--line);padding-top:22px;margin-bottom:34px}.mini-heading h2{font-size:clamp(36px,4vw,64px);max-width:850px}.project-directory{border-top:1px solid var(--line)}.project-directory a{display:grid;grid-template-columns:70px minmax(0,1fr) minmax(210px,.42fr);gap:20px;align-items:center;padding:19px 0;border-bottom:1px solid var(--line);text-decoration:none;transition:padding .25s,color .25s}.project-directory a:hover{padding-left:10px;color:#0798b5}.project-directory span{font-size:10px;color:#85878c;letter-spacing:.14em}.project-directory strong{font-size:17px;font-weight:650}.project-directory em{font-style:normal;text-transform:uppercase;font-size:9px;letter-spacing:.13em;color:#76787d}
+
+/* chapter headings */
+.chapter{padding:92px 0 62px}.chapter--light{background:rgba(250,249,245,.3)}.chapter-title{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.55fr);gap:8vw;align-items:end;border-top:1px solid var(--line);padding-top:22px}.chapter-title h2{font-size:clamp(48px,6.1vw,98px)}.chapter-title>p:last-child{align-self:end}.chapter--dark{padding-top:112px;background:var(--ink);color:#fff}.chapter--dark .chapter-title{border-color:var(--line-light)}.chapter--dark .chapter-title>p:last-child{color:#a8a9ad}
+
+/* project case system */
+.project-case{padding:74px 0 108px;border-top:1px solid rgba(10,10,10,.1)}.project-case__header{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.55fr);gap:8vw;align-items:end;margin-bottom:34px}.project-case__header h2{font-size:clamp(48px,6.5vw,104px)}.project-facts{border-top:1px solid var(--line)}.project-facts p{margin:0;padding:12px 0;border-bottom:1px solid var(--line);display:grid;grid-template-columns:90px 1fr;gap:12px;font-size:12px;line-height:1.45;color:#61636a}.project-facts strong{text-transform:uppercase;font-size:9px;letter-spacing:.12em;color:#222}.project-intro{display:grid;grid-template-columns:minmax(0,.8fr) minmax(300px,.55fr);gap:8vw;margin-bottom:34px}.project-intro p{margin:0}.project-intro__lead{font-family:var(--serif);font-size:clamp(26px,3vw,44px);line-height:1.28;letter-spacing:-.025em}.project-intro>p:last-child{font-size:15px;line-height:1.7;color:#606269}.project-band{width:min(1600px,calc(100% - 56px));margin:40px auto 13px;padding:13px 16px;border-radius:8px;display:flex;justify-content:space-between;gap:20px;align-items:center;text-transform:uppercase;font-size:9px;letter-spacing:.14em;font-weight:800}.project-band--red{background:#e42325;color:#fff}.project-band--darkred{background:#170708;color:#ff4b4b;border:1px solid #5b1518}
+
+/* uncropped portfolio masonry */
+.portfolio-masonry{columns:3;column-gap:var(--gap)}.portfolio-masonry--two{columns:2}.portfolio-masonry--four{columns:4}.media-card{break-inside:avoid;margin:0 0 var(--gap);border-radius:var(--radius);overflow:hidden;background:#e7e5df;border:1px solid rgba(0,0,0,.08);cursor:zoom-in;position:relative}.media-card img{display:block;width:100%;height:auto!important;object-fit:contain!important;border-radius:calc(var(--radius) - 1px);transition:filter .25s ease,transform .25s ease}.media-card:hover img{filter:brightness(1.03)}.media-card figcaption{display:flex;justify-content:space-between;gap:12px;padding:9px 11px;background:rgba(255,255,255,.94);font-size:8px;line-height:1.4;text-transform:uppercase;letter-spacing:.1em;color:#6c6e74}.portfolio-masonry--dark .media-card{background:#111;border-color:#292a2e}.portfolio-masonry--dark .media-card figcaption{background:#111;color:#929399}
+.project-proof{display:grid;grid-template-columns:minmax(240px,.42fr) minmax(0,1.58fr);gap:34px;margin-top:42px;padding-top:28px;border-top:1px solid var(--line)}.proof-copy h3{font-size:31px;line-height:1.02;letter-spacing:-.04em;margin:0 0 14px}.proof-copy p:last-child{font-size:13px;color:#67696f;line-height:1.6}.proof-gallery{columns:2;column-gap:var(--gap)}.proof-gallery figure{margin:0 0 var(--gap);break-inside:avoid;border-radius:var(--radius);overflow:hidden;background:#ddd}.proof-gallery img{display:block;width:100%;height:auto;object-fit:contain}.project-proof--compact{margin-top:32px}
+.embedded-motion{margin-top:24px}.embedded-motion .motion-card{max-width:900px}.embedded-motion video{width:100%;height:auto;object-fit:contain;border-radius:var(--radius);display:block;background:#050505}.embedded-motion .motion-card__meta{padding:10px 2px 0;color:#696b70;font-size:9px;letter-spacing:.12em;text-transform:uppercase;display:flex;justify-content:space-between}
+
+/* editorial/content */
+.content-project{padding:74px 0 94px;border-top:1px solid rgba(0,0,0,.1)}.split-project{display:grid;grid-template-columns:.48fr 1.52fr;gap:46px;align-items:start}.split-project--reverse{grid-template-columns:.48fr 1.52fr}.split-project__copy{position:sticky;top:112px}.split-project h2{font-size:clamp(44px,5vw,76px)}.split-project__copy>p:last-child{font-size:15px;line-height:1.7;color:#62646a;margin-top:24px}.content-project__header{display:grid;grid-template-columns:1fr minmax(300px,.55fr);gap:7vw;align-items:end;margin-bottom:32px}.content-project__header h2{font-size:clamp(42px,5vw,78px)}.content-project__header>p{align-self:end}.cyber-project{padding-bottom:112px}
+
+/* dark digital chapter */
+.dark-project{background:#050505}.digital-project{padding:80px 0 108px;border-top:1px solid rgba(255,255,255,.12)}.project-case__header--dark .project-number,.content-project__header--dark .project-number{color:#86888e}.project-case__header--dark .project-kicker{color:#9b9ca2}.project-case__header--dark .project-facts{border-color:var(--line-light)}.project-case__header--dark .project-facts p{border-color:var(--line-light);color:#b1b2b7}.project-case__header--dark .project-facts strong{color:#fff}.content-project__header--dark>p{color:#a8a9ae}.ui-showcase{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--gap);align-items:start}.ui-showcase figure{margin:0;border:1px solid #26272b;border-radius:var(--radius);overflow:hidden;background:#0d0e10}.ui-showcase img{display:block;width:100%;height:auto;object-fit:contain}.ui-showcase figure:last-child:nth-child(odd){grid-column:1/-1}.ui-showcase--entertainment{grid-template-columns:repeat(3,minmax(0,1fr))}.ui-showcase--entertainment figure:last-child:nth-child(odd){grid-column:auto}.motion-triptych{display:grid;grid-template-columns:repeat(3,1fr);gap:var(--gap);margin-top:24px}.motion-triptych video{display:block;width:100%;height:auto;object-fit:contain;background:#0d0e10;border:1px solid #292a2f;border-radius:var(--radius)}
+
+/* motion studies */
+.motion-studies{padding:104px 0 110px;border-top:1px solid var(--line-light)}.section-heading--dark{color:#fff}.section-heading--dark>p{color:#aaa}.motion-grid{columns:3;column-gap:var(--gap)}.motion-card{break-inside:avoid;margin:0 0 var(--gap);background:#0e0f11;border:1px solid #292a2e;border-radius:var(--radius);overflow:hidden}.motion-card video{display:block;width:100%;height:auto!important;object-fit:contain!important;background:#08090a}.motion-card__meta{display:flex;justify-content:space-between;gap:16px;padding:10px 12px;color:#8e8f95;font-size:8px;letter-spacing:.1em;text-transform:uppercase}.motion-card__meta strong{color:#dedee1;font-size:9px}
+
+/* practice */
+.practice-section{padding:104px 0;border-top:1px solid var(--line-light)}.practice-grid{columns:3;column-gap:var(--gap)}.practice-grid figure{break-inside:avoid;margin:0 0 var(--gap);border-radius:var(--radius);overflow:hidden;background:#111;border:1px solid #27282c}.practice-grid img{display:block;width:100%;height:auto;object-fit:contain}.practice-note{margin-top:30px;padding:25px 0;border-top:1px solid var(--line-light);border-bottom:1px solid var(--line-light);display:grid;grid-template-columns:1fr 1fr;gap:40px}.practice-note div{display:grid;gap:5px}.practice-note strong{font-size:18px}.practice-note span{font-size:9px;text-transform:uppercase;letter-spacing:.13em;color:#888a90}.practice-note p{margin:0;font-size:13px;line-height:1.65;color:#a9aaaf}
+
+/* archive - dark ending */
+.archive-section{padding:105px 0 112px;border-top:1px solid var(--line-light)}.archive-toolbar{display:flex;justify-content:space-between;gap:28px;align-items:center;margin-bottom:26px}.filter-row{display:flex;flex-wrap:wrap;gap:7px}.filter-btn{border:1px solid #35363a;background:transparent;color:#c5c6ca;padding:9px 13px;border-radius:999px;font-size:9px;text-transform:uppercase;letter-spacing:.11em;cursor:pointer}.filter-btn:hover,.filter-btn.is-active{background:var(--cyan);border-color:var(--cyan);color:#001014}#archive-status{margin:0;color:#73757a;font-size:9px;text-transform:uppercase;letter-spacing:.12em}.archive-grid{columns:4;column-gap:var(--gap)}.archive-item{break-inside:avoid;margin:0 0 var(--gap);border-radius:var(--radius);overflow:hidden;border:1px solid #242529;background:#0e0f11;cursor:zoom-in}.archive-item img{display:block;width:100%;height:auto!important;object-fit:contain!important}.archive-item figcaption{padding:9px 10px;display:flex;justify-content:space-between;gap:14px;color:#999ba0;font-size:8px;line-height:1.35;text-transform:uppercase;letter-spacing:.09em}.archive-item figcaption strong{color:#d6d7da;font-weight:600}.archive-more{display:flex;justify-content:center;padding-top:30px}.portfolio-btn{min-height:46px;padding:0 20px;border:1px solid #3b3c40;background:transparent;color:#fff;text-transform:uppercase;font-size:9px;font-weight:800;letter-spacing:.13em;border-radius:999px;cursor:pointer}.portfolio-btn:hover{border-color:var(--cyan);color:var(--cyan)}
+
+/* bottom ticker */
+.portfolio-marquee--bottom{position:relative;background:var(--cyan);border:0;box-shadow:none}.portfolio-marquee--bottom .marquee-group{padding-top:16px;padding-bottom:16px}
+
+/* about / contact board inspired by the user's PDF hierarchy */
+.about-board{padding:112px 0 90px;border-top:1px solid var(--line-light)}.about-board__grid{display:grid;grid-template-columns:1fr 1fr;gap:8vw}.about-board__intro h2{font-size:clamp(50px,6vw,96px)}.about-lead{font-family:var(--serif);font-size:clamp(23px,2.5vw,38px);line-height:1.38;letter-spacing:-.025em;color:#d9dade}.about-board__facts{border-top:1px solid var(--line-light)}.about-board__facts article{padding:20px 0;border-bottom:1px solid var(--line-light);display:grid;grid-template-columns:115px 1fr;column-gap:18px}.about-board__facts article>span{grid-row:1/3;color:var(--cyan);font-size:9px;letter-spacing:.14em}.about-board__facts strong{font-size:17px;line-height:1.35}.about-board__facts p{margin:7px 0 0;color:#919399;font-size:12px;line-height:1.55}
+.contact-board{background:#090a0c;color:#fff;padding:86px 0 48px;border-top:1px solid var(--line-light)}.contact-board__head{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.55fr);gap:8vw;align-items:end;margin-bottom:40px}.contact-board h2{font-size:clamp(52px,7vw,112px);max-width:1050px}.contact-board__head>p:last-child{margin:0;font-size:18px;line-height:1.5;color:#a2a3a8}.contact-link-grid{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line-light);border-left:1px solid var(--line-light)}.contact-link-grid a{min-height:150px;padding:22px;display:flex;flex-direction:column;justify-content:space-between;border-right:1px solid var(--line-light);border-bottom:1px solid var(--line-light);text-decoration:none;transition:.25s}.contact-link-grid a span{font-size:9px;color:#77797f;letter-spacing:.14em;text-transform:uppercase}.contact-link-grid a strong{font-size:20px;letter-spacing:-.025em}.contact-link-grid a em{font-style:normal;color:var(--cyan);font-size:11px}.contact-link-grid a:hover{background:var(--cyan);color:#001014}.contact-link-grid a:hover span,.contact-link-grid a:hover em{color:#001014}.contact-signoff{display:flex;align-items:center;justify-content:space-between;gap:30px;padding-top:38px}.contact-signoff img{width:108px;height:auto}.contact-signoff p{margin:0;color:#77797e;font-size:10px;letter-spacing:.11em;text-transform:uppercase}
+.portfolio-footer{background:#000;color:#77797e;padding:26px 0;border-top:1px solid #18191c}.portfolio-footer__inner{display:flex;justify-content:space-between;gap:25px;align-items:center}.portfolio-footer p{margin:0;font-size:9px;letter-spacing:.05em}.portfolio-footer a{color:#a8aaae}.portfolio-backtop{text-decoration:none;text-transform:uppercase;letter-spacing:.11em;font-size:9px}
+
+/* lightbox: always contain */
+.portfolio-lightbox{width:100vw;height:100vh;max-width:none;max-height:none;border:0;margin:0;padding:0;background:rgba(0,0,0,.96);color:#fff;overflow:hidden}.portfolio-lightbox::backdrop{background:rgba(0,0,0,.96)}.portfolio-lightbox[open]{display:grid;grid-template-columns:70px 1fr 70px;align-items:center}.portfolio-lightbox figure{margin:0;height:100vh;display:grid;grid-template-rows:1fr auto;min-width:0;padding:38px 0 24px}.portfolio-lightbox figure img{min-height:0;width:100%;height:100%;object-fit:contain!important}.portfolio-lightbox figcaption{display:flex;justify-content:space-between;gap:30px;padding-top:12px;font-size:9px;text-transform:uppercase;letter-spacing:.11em;color:#d9dade}.portfolio-lightbox figcaption span{color:#77797e}.lightbox-close{position:absolute;top:16px;right:16px;width:42px;height:42px;border:1px solid #36373b;background:#090a0c;color:#fff;font-size:25px;z-index:3;cursor:pointer}.lightbox-nav{background:transparent;border:0;color:#999;font-size:30px;height:100%;cursor:pointer}.lightbox-nav:hover{color:var(--cyan)}
+
+/* subtle reveal */
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s ease}.reveal.is-visible{opacity:1;transform:none}
+
+/* responsive */
+@media(max-width:1100px){
+  .portfolio-masonry,.motion-grid,.practice-grid{columns:2}.portfolio-masonry--four{columns:3}.archive-grid{columns:3}.capability-list{grid-template-columns:repeat(2,1fr)}.contact-link-grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:900px){
+  :root{--header-h:62px}.width-sixteen-col{width:min(100% - 32px,1600px)}.portfolio-header__inner{width:calc(100% - 24px)}.portfolio-menu-toggle{display:block;margin-left:auto}.portfolio-nav{display:none;position:absolute;top:62px;left:12px;right:12px;background:rgba(5,5,5,.98);border:1px solid #292a2d;padding:18px;flex-direction:column;align-items:flex-start;gap:0}.portfolio-nav.is-open{display:flex}.portfolio-nav a{width:100%;padding:12px 0;border-bottom:1px solid #202124}.portfolio-marquee--landing{top:var(--header-h)}
+  .section-heading,.chapter-title,.project-case__header,.project-intro,.content-project__header,.contact-board__head,.about-board__grid{grid-template-columns:1fr;gap:24px}.capability-wall{grid-template-columns:1fr 1fr}.capability-wall figure:first-child{grid-row:auto;grid-column:1/-1}.project-directory a{grid-template-columns:45px 1fr}.project-directory em{grid-column:2}.split-project,.split-project--reverse{grid-template-columns:1fr}.split-project__copy{position:static}.project-proof{grid-template-columns:1fr}.practice-note{grid-template-columns:1fr}.ui-showcase--entertainment{grid-template-columns:1fr 1fr}.motion-triptych{grid-template-columns:1fr 1fr}.project-band{width:calc(100% - 32px)}
+}
+@media(max-width:650px){
+  .portfolio-section,.intro-section{padding:76px 0}.project-case,.content-project,.digital-project{padding:64px 0 78px}.chapter{padding:72px 0 45px}.section-heading h2,.chapter-title h2,.project-case__header h2,.content-project__header h2,.split-project h2,.about-board h2,.contact-board h2{font-size:clamp(40px,12vw,66px)}.capability-wall{grid-template-columns:1fr}.capability-wall figure:first-child{grid-column:auto}.capability-list{grid-template-columns:1fr}.capability-list article{min-height:165px}.mini-heading{grid-template-columns:1fr}.project-directory a{grid-template-columns:38px 1fr}.project-directory em{grid-column:2}.portfolio-masonry,.portfolio-masonry--two,.portfolio-masonry--three,.portfolio-masonry--four,.motion-grid,.practice-grid,.proof-gallery,.archive-grid{columns:1}.ui-showcase,.ui-showcase--entertainment{grid-template-columns:1fr}.ui-showcase figure:last-child:nth-child(odd){grid-column:auto}.motion-triptych{grid-template-columns:1fr}.archive-toolbar{align-items:flex-start;flex-direction:column}.contact-link-grid{grid-template-columns:1fr}.contact-signoff{align-items:flex-start;flex-direction:column}.portfolio-footer__inner{align-items:flex-start;flex-direction:column}.portfolio-lightbox[open]{grid-template-columns:42px 1fr 42px}.portfolio-lightbox figure{padding-top:66px}.portfolio-lightbox figcaption{flex-direction:column;gap:4px}.marquee-group{gap:20px;padding-right:20px;font-size:9px}.portfolio-brand,.portfolio-brand img{width:78px}.project-band{flex-direction:column;align-items:flex-start}.about-board__facts article{grid-template-columns:90px 1fr}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.portfolio-marquee__track{animation:none}.reveal{opacity:1;transform:none;transition:none}}
+
+/* Final portfolio refinements — full artwork visibility, restrained spacing, editorial close */
+:root{--radius:11px;--gap:14px}
+
+/* Every portfolio image keeps its native aspect ratio. Containers never force a crop. */
+.media-card,.archive-item,.proof-gallery figure,.practice-grid figure,.ui-showcase figure,.capability-wall figure,.capability-wall .capability-motion{height:auto!important}
+.media-card img,.archive-item img,.proof-gallery img,.practice-grid img,.ui-showcase img,.capability-wall img,.capability-wall video,.motion-card video,.motion-triptych video,.embedded-motion video{width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;object-position:center!important}
+
+/* Connected but distinct artwork spacing. */
+.portfolio-masonry,.proof-gallery,.practice-grid,.motion-grid,.archive-grid{column-gap:var(--gap)}
+.media-card,.proof-gallery figure,.practice-grid figure,.motion-card,.archive-item{margin-bottom:var(--gap)}
+.ui-showcase,.motion-triptych,.capability-wall{gap:var(--gap)}
+
+/* More consistent section rhythm — no oversized dead zones between bodies of work. */
+.intro-section{padding:88px 0 68px}
+.project-index{padding:16px 0 74px}
+.chapter{padding:76px 0 48px}
+.chapter--dark{padding-top:88px}
+.project-case{padding:62px 0 84px}
+.content-project{padding:62px 0 78px}
+.cyber-project{padding-bottom:88px}
+.digital-project{padding:68px 0 88px}
+.motion-studies{padding:82px 0 88px}
+.practice-section{padding:82px 0}
+.archive-section{padding:84px 0 90px}
+.about-board{padding:86px 0 78px}
+
+/* The lower ticker is a deliberate bridge into the final contact board. */
+.portfolio-marquee--bottom{border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(0,0,0,.35)}
+.portfolio-marquee--bottom .portfolio-marquee__track{animation-duration:38s}
+
+/* Editorial end board inspired by the closing structure of the supplied PDF, not a generic footer card grid. */
+.contact-board{background:#070809;color:#fff;padding:84px 0 42px;border-top:0;position:relative;overflow:hidden}
+.contact-board::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at 78% 18%,rgba(18,184,214,.10),transparent 32%),linear-gradient(180deg,rgba(255,255,255,.015),transparent 40%)}
+.contact-editorial{position:relative;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(390px,.85fr);gap:8vw;align-items:start}
+.contact-editorial__statement{padding-right:2vw}
+.contact-editorial__statement h2{margin:0;font-size:clamp(64px,9.4vw,154px);line-height:.82;letter-spacing:-.065em;font-weight:750}
+.contact-editorial__statement>p:last-child{max-width:760px;margin:34px 0 0;color:#8e9095;font-size:14px;line-height:1.72}
+.contact-editorial__connect{padding-top:4px;border-top:1px solid var(--line-light)}
+.contact-editorial__connect .eyebrow{padding-top:18px}
+.contact-editorial__connect h3{font-family:var(--serif);font-size:clamp(32px,4vw,56px);line-height:1;margin:0 0 18px;font-weight:400;letter-spacing:-.035em}
+.contact-editorial__connect>p:last-of-type{margin:0 0 26px;color:#8f9196;font-size:13px;line-height:1.65;max-width:560px}
+.contact-link-grid--editorial{display:block;border:0}
+.contact-link-grid--editorial a{min-height:0;padding:17px 0;display:grid;grid-template-columns:90px minmax(0,1fr) auto;align-items:center;gap:16px;border:0;border-top:1px solid var(--line-light);background:transparent;border-radius:0}
+.contact-link-grid--editorial a:last-child{border-bottom:1px solid var(--line-light)}
+.contact-link-grid--editorial a span{font-size:8px;color:#74767c;letter-spacing:.15em}
+.contact-link-grid--editorial a strong{font-size:clamp(16px,1.6vw,24px);font-weight:600;letter-spacing:-.025em;overflow-wrap:anywhere}
+.contact-link-grid--editorial a em{justify-self:end;font-size:10px}
+.contact-link-grid--editorial a:hover{background:transparent;color:var(--cyan);padding-left:8px;padding-right:8px}
+.contact-link-grid--editorial a:hover span,.contact-link-grid--editorial a:hover em{color:var(--cyan)}
+.contact-signoff{position:relative;margin-top:62px;padding-top:28px;border-top:1px solid var(--line-light)}
+.contact-signoff img{width:102px}
+.contact-signoff>div{text-align:right}
+.contact-signoff strong{font-size:14px;letter-spacing:.02em}
+.contact-signoff p{margin-top:5px}
+
+@media(max-width:900px){
+  .contact-editorial{grid-template-columns:1fr;gap:58px}
+  .contact-editorial__statement h2{font-size:clamp(60px,15vw,112px)}
+  .contact-signoff>div{text-align:left}
+}
+@media(max-width:650px){
+  :root{--gap:10px;--radius:9px}
+  .intro-section{padding:66px 0 56px}.project-index{padding-bottom:58px}.chapter{padding:60px 0 38px}.project-case,.content-project,.digital-project{padding:54px 0 66px}.motion-studies,.practice-section,.archive-section,.about-board{padding:66px 0}
+  .contact-board{padding:68px 0 36px}.contact-editorial{gap:48px}.contact-editorial__statement h2{font-size:clamp(54px,18vw,92px)}
+  .contact-link-grid--editorial a{grid-template-columns:72px 1fr;gap:10px}.contact-link-grid--editorial a em{display:none}.contact-signoff{margin-top:48px}
+}
+
+/* Preserve the approved slightly zoomed-out landing treatment. */
+@media(min-width:1101px){
+  .portfolio-landing__art img{width:94%;margin-inline:auto}
+}
+@media(min-width:651px) and (max-width:1100px){
+  .portfolio-landing__art img{width:97%;margin-inline:auto}
+}
+
+/* Media visibility fail-safe: content must remain visible even if motion/reveal JS is interrupted. */
+.no-js .reveal,
+.reveal.media-force-visible { opacity: 1 !important; transform: none !important; }
+/* Final resilience: reveal animation must never make portfolio media disappear. */
+.reveal{opacity:1!important;transform:none!important;}
+
+
+/* ============================================================
+   COMPACT TETRIS LAYOUT — final portfolio packing pass
+   ============================================================ */
+:root{--gap:10px;--radius:9px}
+
+/* Header: no logo; navigation is visually centered. */
+.portfolio-header__inner{justify-content:center!important;position:relative}
+.portfolio-brand{display:none!important}
+.portfolio-nav{margin-inline:auto;justify-content:center}
+
+/* JS upgrades all media clusters to a true shortest-column waterfall.
+   Artwork itself always retains its native aspect ratio. */
+.tetris-layout{
+  position:relative!important;
+  display:block!important;
+  columns:auto!important;
+  column-gap:0!important;
+  align-items:initial!important;
+  min-height:1px;
+}
+.tetris-layout>.media-card,
+.tetris-layout>.archive-item,
+.tetris-layout>.motion-card,
+.tetris-layout>figure,
+.tetris-layout>.capability-motion{
+  position:absolute!important;
+  margin:0!important;
+  break-inside:auto!important;
+  grid-column:auto!important;
+  grid-row:auto!important;
+}
+.tetris-layout img,
+.tetris-layout video{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  max-height:none!important;
+  object-fit:contain!important;
+  object-position:center center!important;
+}
+
+/* Keep every card visually connected without merging them together. */
+.media-card,.archive-item,.motion-card,.proof-gallery figure,.practice-grid figure,
+.ui-showcase figure,.capability-wall figure,.capability-wall .capability-motion{
+  border-radius:var(--radius)!important;
+}
+.media-card img,.archive-item img,.proof-gallery img,.practice-grid img,
+.ui-showcase img,.capability-wall img,.capability-wall video,.motion-card video{
+  border-radius:calc(var(--radius) - 1px) calc(var(--radius) - 1px) 0 0;
+}
+.proof-gallery figure img,.practice-grid figure img,.ui-showcase figure img{
+  border-radius:calc(var(--radius) - 1px);
+}
+
+/* Remove legacy layout rules that intentionally made certain cards span rows/widths. */
+.capability-wall figure:first-child{grid-row:auto!important;grid-column:auto!important}
+.ui-showcase figure:last-child:nth-child(odd){grid-column:auto!important}
+.embedded-motion .motion-card{max-width:none!important;width:100%!important}
+
+@media(max-width:900px){
+  .portfolio-header__inner{justify-content:flex-end!important}
+  .portfolio-menu-toggle{margin-left:auto!important}
+  .portfolio-nav.is-open{align-items:center!important;text-align:center!important}
+  .portfolio-nav.is-open a{text-align:center!important}
+}
+@media(max-width:650px){:root{--gap:8px;--radius:8px}}
+\n
+/* ============================================================
+   END SECTION VISIBILITY + PORTFOLIO LINK — high contrast pass
+   ============================================================ */
+.about-board,
+.contact-board{color:#f5f7f8}
+
+.about-board__intro h2,
+.about-board__intro .about-lead,
+.about-board__facts strong,
+.contact-editorial__statement h2,
+.contact-editorial__connect h3,
+.contact-link-grid--editorial a strong,
+.contact-signoff strong{color:#f4f6f7!important}
+
+.about-board__intro h2{opacity:1!important;text-shadow:0 1px 0 rgba(255,255,255,.02)}
+.about-board__intro .about-lead{color:#eef1f3!important}
+.about-board__facts article>span,
+.contact-board .eyebrow{color:var(--cyan)!important;font-weight:800}
+.about-board__facts p{color:#b9bdc3!important}
+.about-board__facts strong{font-weight:700}
+
+.contact-editorial__statement>p:last-child,
+.contact-editorial__connect>p:last-of-type{color:#b3b7bd!important}
+.contact-link-grid--editorial a{color:#f2f4f6!important}
+.contact-link-grid--editorial a span{color:#a8adb4!important}
+.contact-link-grid--editorial a em{color:var(--cyan)!important;font-weight:800}
+.contact-signoff p{color:#a7abb1!important}
+
+/* The requested portfolio URL is deliberately the strongest link in the close. */
+.contact-link-grid--editorial a.contact-featured{
+  margin:8px 0 10px;
+  padding:18px 16px;
+  border:1px solid var(--cyan)!important;
+  border-radius:8px;
+  background:linear-gradient(90deg,rgba(18,184,214,.18),rgba(18,184,214,.05));
+  box-shadow:inset 3px 0 0 var(--cyan);
+}
+.contact-link-grid--editorial a.contact-featured span,
+.contact-link-grid--editorial a.contact-featured em{color:#54e4ff!important}
+.contact-link-grid--editorial a.contact-featured strong{
+  color:#fff!important;
+  font-size:clamp(18px,1.8vw,27px);
+  text-decoration:underline;
+  text-decoration-color:rgba(84,228,255,.55);
+  text-underline-offset:5px;
+}
+.contact-link-grid--editorial a.contact-featured:hover{
+  background:var(--cyan);
+  color:#001014!important;
+  padding-left:18px;
+  padding-right:18px;
+}
+.contact-link-grid--editorial a.contact-featured:hover span,
+.contact-link-grid--editorial a.contact-featured:hover strong,
+.contact-link-grid--editorial a.contact-featured:hover em{color:#001014!important}
+
+/* Increase readability of the close on dim displays without changing the layout. */
+.contact-board{background:#06090b}
+.about-board{background:#050607}
+.contact-editorial__connect,
+.about-board__facts{border-color:#34383d!important}
+.about-board__facts article,
+.contact-link-grid--editorial a{border-color:#2d3135!important}
+
+@media(max-width:650px){
+  .contact-link-grid--editorial a.contact-featured{padding:16px 13px}
+}
+
+
+/* Animated paper-grid field — inspired by the supplied wavy-grid reference video. */
+#wave-paper-grid{
+  position:fixed;
+  inset:0;
+  width:100vw;
+  height:100vh;
+  pointer-events:none;
+  z-index:0;
+  opacity:.82;
+  mix-blend-mode:multiply;
+}
+@media (prefers-reduced-motion:reduce){#wave-paper-grid{opacity:.58}}
+
+/* ============================================================
+   AUTONOMOUS WHITE WAVE PAPER — refinement pass
+   The mesh moves from time only; page scrolling does not drive it.
+   ============================================================ */
+body{background:#fff!important}
+body::before{
+  background-color:#fff!important;
+  opacity:.045!important;
+}
+.light-section,
+.chapter--light{background-color:rgba(255,255,255,.10)!important}
+#wave-paper-grid{
+  opacity:.64!important;
+  mix-blend-mode:multiply!important;
+  filter:contrast(.82) brightness(1.20);
+}
+@media (prefers-reduced-motion:reduce){
+  #wave-paper-grid{opacity:.42!important;filter:contrast(.78) brightness(1.24)}
+}
+
+/* Autonomous-motion visibility fix: keep the page bright while making the live
+   deformation readable even when the visitor is completely stationary. */
+#wave-paper-grid{
+  opacity:.72!important;
+  filter:contrast(.88) brightness(1.15)!important;
+}
+
+/* ============================================================
+   DARK SECTIONS — subtle cinematic cyan light drift
+   A simple counterpoint to the autonomous white wave grid.
+   No controls, no particles, no heavy JS.
+   ============================================================ */
+.portfolio-landing,
+.chapter--dark,
+.dark-project,
+.about-board,
+.contact-board,
+.portfolio-footer{
+  isolation:isolate;
+}
+
+/* Keep the real content above the ambient layer. */
+.portfolio-landing > *,
+.chapter--dark > *,
+.dark-project > *,
+.about-board > *,
+.contact-board > *,
+.portfolio-footer > *{
+  position:relative;
+  z-index:2;
+}
+
+/* Slow, soft pools of cyan light. */
+.portfolio-landing::before,
+.chapter--dark::before,
+.dark-project::before,
+.about-board::before,
+.contact-board::before,
+.portfolio-footer::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse 58% 38% at 12% 12%, rgba(18,184,214,.105), transparent 66%),
+    radial-gradient(ellipse 46% 34% at 86% 72%, rgba(18,184,214,.075), transparent 70%);
+  background-repeat:no-repeat;
+  transform:translate3d(0,0,0) scale(1.02);
+  filter:blur(18px);
+  opacity:.88;
+  animation:inteDarkGlowDrift 18s ease-in-out infinite alternate;
+}
+
+/* One restrained travelling highlight — like a studio light grazing black paper. */
+.portfolio-landing::after,
+.chapter--dark::after,
+.dark-project::after,
+.about-board::after,
+.contact-board::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  z-index:1;
+  pointer-events:none;
+  background:linear-gradient(
+    108deg,
+    transparent 0%,
+    transparent 43%,
+    rgba(30,211,239,.00) 46%,
+    rgba(30,211,239,.055) 50%,
+    rgba(30,211,239,.00) 54%,
+    transparent 57%,
+    transparent 100%
+  );
+  background-size:220% 100%;
+  background-position:130% 0;
+  mix-blend-mode:screen;
+  opacity:.72;
+  animation:inteDarkLightSweep 15s cubic-bezier(.45,0,.55,1) infinite;
+}
+
+/* The hero artwork itself stays intact; the light simply washes over it. */
+.portfolio-landing::before,
+.portfolio-landing::after{border-radius:0}
+
+/* The lower half is a touch more visible so the black ending feels alive. */
+.about-board::before,
+.contact-board::before,
+.portfolio-footer::before{opacity:1}
+.contact-board::after{opacity:.9}
+
+@keyframes inteDarkGlowDrift{
+  0%{
+    background-position:0% 0%,100% 100%;
+    transform:translate3d(-1.5%,0,0) scale(1.02);
+  }
+  50%{
+    background-position:28% 12%,78% 72%;
+    transform:translate3d(1%,1%,0) scale(1.045);
+  }
+  100%{
+    background-position:55% 18%,54% 48%;
+    transform:translate3d(2.5%,-.5%,0) scale(1.03);
+  }
+}
+
+@keyframes inteDarkLightSweep{
+  0%,18%{background-position:135% 0}
+  55%,72%{background-position:-35% 0}
+  100%{background-position:-35% 0}
+}
+
+@media(max-width:650px){
+  .portfolio-landing::before,
+  .chapter--dark::before,
+  .dark-project::before,
+  .about-board::before,
+  .contact-board::before,
+  .portfolio-footer::before{
+    filter:blur(12px);
+    opacity:.72;
+  }
+  .portfolio-landing::after,
+  .chapter--dark::after,
+  .dark-project::after,
+  .about-board::after,
+  .contact-board::after{opacity:.48}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .portfolio-landing::before,
+  .chapter--dark::before,
+  .dark-project::before,
+  .about-board::before,
+  .contact-board::before,
+  .portfolio-footer::before,
+  .portfolio-landing::after,
+  .chapter--dark::after,
+  .dark-project::after,
+  .about-board::after,
+  .contact-board::after{
+    animation:none!important;
+  }
+}
+.portfolio-landing,
+.chapter--dark,
+.dark-project,
+.about-board,
+.contact-board,
+.portfolio-footer{position:relative;overflow:hidden}
+
+/* ============================================================
+   DARK LIGHT SWEEP — TRUE ANIMATED PASS
+   Uses physical translation (not background-position), so the
+   cyan light visibly travels left -> right even when stationary.
+   Landing opacity is intentionally lower than interior dark areas.
+   ============================================================ */
+.portfolio-landing,
+.chapter--dark,
+.dark-project,
+.about-board,
+.contact-board,
+.portfolio-footer{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+
+/* Preserve the soft cyan ambience in the black sections. */
+.portfolio-landing::before,
+.chapter--dark::before,
+.dark-project::before,
+.about-board::before,
+.contact-board::before,
+.portfolio-footer::before{
+  animation:inteDarkGlowDrift 15s ease-in-out infinite alternate !important;
+}
+
+/* A real moving light bar: the pseudo-element itself crosses the section. */
+.portfolio-landing::after,
+.chapter--dark::after,
+.dark-project::after,
+.about-board::after,
+.contact-board::after,
+.portfolio-footer::after{
+  content:"";
+  position:absolute;
+  z-index:1;
+  pointer-events:none;
+  top:-35%;
+  bottom:-35%;
+  left:-48%;
+  width:34%;
+  height:170%;
+  background:linear-gradient(
+    90deg,
+    rgba(21,208,240,0) 0%,
+    rgba(21,208,240,.018) 19%,
+    rgba(21,208,240,.070) 39%,
+    rgba(92,233,255,.145) 49%,
+    rgba(21,208,240,.070) 59%,
+    rgba(21,208,240,.018) 79%,
+    rgba(21,208,240,0) 100%
+  );
+  filter:blur(9px);
+  mix-blend-mode:screen;
+  transform:skewX(-13deg) translate3d(0,0,0);
+  will-change:transform,opacity;
+  opacity:.42;
+  animation:inteTrueLightPass 7.4s cubic-bezier(.33,.03,.23,.99) infinite !important;
+}
+
+/* Landing: same animation, but it should feel like a faint wash over the artwork. */
+.portfolio-landing::after{
+  opacity:.15;
+  filter:blur(11px);
+}
+
+/* Dark ending: a little stronger, matching the original dark-glow feel. */
+.about-board::after,
+.contact-board::after,
+.portfolio-footer::after{
+  opacity:.48;
+}
+
+@keyframes inteTrueLightPass{
+  0%{
+    transform:skewX(-13deg) translate3d(0,0,0);
+    opacity:0;
+  }
+  7%{opacity:.18}
+  14%{opacity:inherit}
+  49%{opacity:inherit}
+  58%{opacity:.16}
+  63%{
+    transform:skewX(-13deg) translate3d(500%,0,0);
+    opacity:0;
+  }
+  100%{
+    transform:skewX(-13deg) translate3d(500%,0,0);
+    opacity:0;
+  }
+}
+
+/* Keep this animation alive even when the browser reports reduced motion;
+   the user explicitly requested an always-running, low-opacity sweep. */
+@media (prefers-reduced-motion:reduce){
+  .portfolio-landing::before,
+  .chapter--dark::before,
+  .dark-project::before,
+  .about-board::before,
+  .contact-board::before,
+  .portfolio-footer::before{
+    animation:inteDarkGlowDrift 22s ease-in-out infinite alternate !important;
+  }
+  .portfolio-landing::after,
+  .chapter--dark::after,
+  .dark-project::after,
+  .about-board::after,
+  .contact-board::after,
+  .portfolio-footer::after{
+    animation:inteTrueLightPass 9.5s cubic-bezier(.33,.03,.23,.99) infinite !important;
+  }
+}
+
+/* ============================================================
+   DARK SECTION HEADING VISIBILITY — FINAL CONTRAST FIX
+   Keep the approved animation/layout unchanged; only restore
+   strong white contrast for the seven requested dark headings.
+   ============================================================ */
+.chapter--dark .chapter-title h2,
+.dark-project .project-case__header--dark h2,
+.dark-project .content-project__header--dark h2,
+.dark-project .section-heading--dark h2{
+  color:#f8fbfc !important;
+  -webkit-text-fill-color:#f8fbfc !important;
+  opacity:1 !important;
+}
+
+/* ============================================================
+   LANDING LIGHT PASS — SOFT / SLOW PHOTO-FIRST OVERRIDE
+   Same moving-light language as the approved lower dark section,
+   but intentionally dimmer, broader and slower so the portrait
+   remains the visual focus. No layout/content changes.
+   ============================================================ */
+.portfolio-landing::before{
+  opacity:.46 !important;
+  filter:blur(23px) !important;
+  animation:inteLandingGlowDrift 26s ease-in-out infinite alternate !important;
+}
+
+.portfolio-landing::after{
+  left:-52% !important;
+  width:40% !important;
+  opacity:0 !important;
+  filter:blur(14px) !important;
+  background:linear-gradient(
+    90deg,
+    rgba(21,208,240,0) 0%,
+    rgba(21,208,240,.010) 20%,
+    rgba(21,208,240,.026) 38%,
+    rgba(92,233,255,.060) 50%,
+    rgba(21,208,240,.026) 62%,
+    rgba(21,208,240,.010) 80%,
+    rgba(21,208,240,0) 100%
+  ) !important;
+  animation:inteLandingLightPass 14.5s cubic-bezier(.38,.05,.25,.98) infinite !important;
+}
+
+@keyframes inteLandingGlowDrift{
+  0%{
+    background-position:0% 0%,100% 100%;
+    transform:translate3d(-1%,0,0) scale(1.018);
+  }
+  50%{
+    background-position:24% 9%,82% 70%;
+    transform:translate3d(.6%,.5%,0) scale(1.030);
+  }
+  100%{
+    background-position:48% 15%,60% 52%;
+    transform:translate3d(1.4%,-.3%,0) scale(1.022);
+  }
+}
+
+@keyframes inteLandingLightPass{
+  0%{
+    transform:skewX(-13deg) translate3d(0,0,0);
+    opacity:0;
+  }
+  8%{opacity:.025}
+  18%{opacity:.065}
+  30%{opacity:.095}
+  56%{opacity:.095}
+  69%{opacity:.050}
+  77%{
+    transform:skewX(-13deg) translate3d(500%,0,0);
+    opacity:0;
+  }
+  100%{
+    transform:skewX(-13deg) translate3d(500%,0,0);
+    opacity:0;
+  }
+}
+
+@media (max-width:650px){
+  .portfolio-landing::before{
+    opacity:.38 !important;
+    filter:blur(17px) !important;
+  }
+  .portfolio-landing::after{
+    opacity:0 !important;
+    filter:blur(12px) !important;
+    animation-duration:16s !important;
+  }
+}
+
+@media (prefers-reduced-motion:reduce){
+  .portfolio-landing::before{
+    animation:inteLandingGlowDrift 30s ease-in-out infinite alternate !important;
+  }
+  .portfolio-landing::after{
+    animation:inteLandingLightPass 17s cubic-bezier(.38,.05,.25,.98) infinite !important;
+  }
+}
+
+/* ============================================================
+   LANDING GLOW — FRONT-LAYER VISIBILITY FIX
+   Keep the approved landing artwork/layout untouched. The cyan
+   ambience and slow light pass now sit OVER the landing artwork,
+   at deliberately low opacity, so the portrait remains dominant.
+   ============================================================ */
+.portfolio-landing::before{
+  z-index:3 !important;
+  opacity:.16 !important;
+  mix-blend-mode:screen !important;
+  pointer-events:none !important;
+}
+.portfolio-landing::after{
+  z-index:4 !important;
+  mix-blend-mode:screen !important;
+  pointer-events:none !important;
+}
+
+/* Keep the moving pass soft but visible now that it is in front. */
+@keyframes inteLandingLightPass{
+  0%{
+    transform:skewX(-13deg) translate3d(0,0,0);
+    opacity:0;
+  }
+  9%{opacity:.018}
+  20%{opacity:.055}
+  34%{opacity:.105}
+  55%{opacity:.105}
+  69%{opacity:.050}
+  78%{
+    transform:skewX(-13deg) translate3d(500%,0,0);
+    opacity:0;
+  }
+  100%{
+    transform:skewX(-13deg) translate3d(500%,0,0);
+    opacity:0;
+  }
+}
+
+@media(max-width:650px){
+  .portfolio-landing::before{opacity:.12 !important}
+}
+
+/* ============================================================
+   LANDING PHOTO — VISIBLE SOFT SHINE
+   Directly overlays the landing artwork so the light is visible
+   across the portrait. The lower dark-section sweep is untouched.
+   ============================================================ */
+.portfolio-landing::before,
+.portfolio-landing::after{
+  content:none !important;
+  display:none !important;
+}
+.portfolio-landing__art{
+  position:relative;
+  isolation:isolate;
+  overflow:hidden;
+}
+.portfolio-landing__art img{
+  position:relative;
+  z-index:1;
+}
+.portfolio-landing__art::before{
+  content:"";
+  position:absolute;
+  inset:-6% -4%;
+  z-index:2;
+  pointer-events:none;
+  background:
+    radial-gradient(ellipse 34% 44% at 56% 42%, rgba(0,210,232,.10), transparent 66%),
+    radial-gradient(ellipse 24% 34% at 80% 62%, rgba(0,188,218,.055), transparent 72%);
+  mix-blend-mode:screen;
+  filter:blur(11px);
+  opacity:.58;
+  animation:inteLandingAmbientBreath 9s ease-in-out infinite alternate;
+}
+.portfolio-landing__art::after{
+  content:"";
+  position:absolute;
+  top:-18%;
+  bottom:-18%;
+  left:-34%;
+  width:28%;
+  height:136%;
+  z-index:3;
+  pointer-events:none;
+  background:linear-gradient(
+    90deg,
+    rgba(0,207,232,0) 0%,
+    rgba(0,207,232,.018) 18%,
+    rgba(0,215,239,.065) 35%,
+    rgba(0,229,255,.15) 48%,
+    rgba(0,218,244,.09) 57%,
+    rgba(0,207,232,.024) 76%,
+    rgba(0,207,232,0) 100%
+  );
+  box-shadow:0 0 52px rgba(0,214,240,.055);
+  mix-blend-mode:screen;
+  filter:blur(13px);
+  opacity: 7;
+  transform:skewX(-10deg) translate3d(0,0,0);
+  will-change:transform;
+  animation:inteLandingVisibleShine 11.5s linear infinite;
+}
+@keyframes inteLandingAmbientBreath{
+  0%{opacity:.40;transform:translate3d(-1%,0,0) scale(1)}
+  50%{opacity:.58;transform:translate3d(.8%,.4%,0) scale(1.025)}
+  100%{opacity:.46;transform:translate3d(1.5%,-.2%,0) scale(1.01)}
+}
+@keyframes inteLandingVisibleShine{
+  0%{transform:skewX(-10deg) translate3d(0,0,0)}
+  100%{transform:skewX(-10deg) translate3d(510%,0,0)}
+}
+@media(max-width:650px){
+  .portfolio-landing__art::before{opacity:.46;filter:blur(9px)}
+  .portfolio-landing__art::after{
+    width:34%;
+    opacity:.34;
+    filter:blur(11px);
+    animation-duration:13.5s;
+  }
+}
+
+/* PROJECT INDEX — exact jump navigation */
+.project-index{position:relative;z-index:3}
+.project-index-help{margin:-18px 0 24px;font-size:12px;line-height:1.55;color:#777b82;letter-spacing:.02em}
+.project-directory a{
+  position:relative;
+  cursor:pointer;
+  padding-right:54px;
+  isolation:isolate;
+}
+.project-directory a::after{
+  content:"↘";
+  position:absolute;
+  right:7px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#12b8d6;
+  font-size:18px;
+  font-weight:700;
+  opacity:.68;
+  transition:transform .22s ease,opacity .22s ease;
+}
+.project-directory a:hover,
+.project-directory a:focus-visible{
+  padding-left:10px;
+  color:#0798b5;
+  background:linear-gradient(90deg,rgba(18,184,214,.055),transparent 72%);
+  outline:none;
+}
+.project-directory a:hover::after,
+.project-directory a:focus-visible::after{
+  transform:translate(4px,-50%);
+  opacity:1;
+}
+.project-directory a:focus-visible{box-shadow:inset 3px 0 0 #12b8d6}
+.project-directory strong{min-width:0}
+.project-directory em{padding-right:8px}
+@media(max-width:760px){
+  .project-index-help{margin-top:-8px}
+  .project-directory a{grid-template-columns:40px minmax(0,1fr);gap:10px;padding-right:42px}
+  .project-directory em{grid-column:2;color:#76787d;padding-right:0;margin-top:-3px}
+}
